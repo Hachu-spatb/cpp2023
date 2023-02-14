@@ -8,7 +8,7 @@ int nuli(int a)
     {
         otv = otv + a / i;
     }
-    return ans;
+    return otv;
 }
 
 int main()
