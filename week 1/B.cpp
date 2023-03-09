@@ -1,5 +1,4 @@
 #include <iostream>
-
 using namespace std;
 
 int nuli(int a)
@@ -9,8 +8,7 @@ int nuli(int a)
     {
         otv = otv + a / i;
     }
-
-    return ans;
+    return otv;
 }
 
 int main()
@@ -20,3 +18,5 @@ int main()
     int otv = nuli(a);
     cout << otv;
 }
+
+// jj
