@@ -1,26 +1,34 @@
 #include <iostream>
 #include <random>
 #include <chrono>
+
 using namespace std;
 
-void sortt(unsigned arr[], int step, unsigned begin_idx, unsigned end_idx)
+void sort_half(unsigned arr[], unsigned begin_idx, unsigned end_idx)
 {
-    for (unsigned i = 0; i < end_idx - begin_idx - step; i += step)
+    int step = end_idx - begin_idx / 2;
+    while (step > 0)
     {
-        for (unsigned j = 0; j < end_idx - begin_idx; j += step)
+        for (unsigned i = 0; i < end_idx - begin_idx - step; i += step)
         {
-            if (arr[j] > arr[j + step])
+            for (unsigned j = 0; j < end_idx - begin_idx; j += step)
             {
-                swap(arr[j], arr[j + step]);
+                if (arr[j] > arr[j + step])
+                {
+                    swap(arr[j], arr[j + step]);
+                }
             }
-        } 
+        }
+        step /= 2;
     }
+    
     return;
 }
 
-
 int main()
 {
+
+
     const int n = 1000;
     unsigned arr[n], arr1[n];
 
@@ -31,39 +39,47 @@ int main()
     {
         arr[i] = dstr(rng);
     }
+    
 
-
+    cout << "iter = [";
     for (unsigned i = 10; i < 1000; i += 10)
     {
-        cout << i << " ";
-        for (int i = 0; i < n; i++)
+        if (i == 10)
+        {
+            cout << i;
+        }
+        else
+        {
+            cout << ", " << i;
+        }
+    }
+    cout << "]" << '\n';
+
+    cout << "half = [";
+    for (unsigned i = 10; i < 1000; i += 10)
+    {
+        for (int j = 0; j < i; j++)
         {
             arr1[i] = arr[i];
         }
-
         auto begin = chrono::steady_clock::now();
 
-        int step = 2;
-        while (n / step > 0)
-        {
-            sortt(arr1, step, 0, n);
-            step *= 2;
-        }
+        sort_half(arr1, 0, i);
 
         auto end = chrono::steady_clock::now();
         auto time_span = chrono::duration_cast<chrono::microseconds>(end - begin);
 
-        cout << time_span.count() << '\n';
-    }
-
-    bool flag = 0;
-    for (int i = 0; i < n - 1; i++)
-    {
-        if (arr[i] > arr[i + 1])
+        if (i == 10)
         {
-            flag = 1;
+            cout << time_span.count();
+        }
+        else
+        {
+            cout << ", " << time_span.count();
         }
     }
+    cout << "]" << '\n';
+
 
     return 0;
 }
