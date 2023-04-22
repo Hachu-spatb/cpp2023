@@ -32,7 +32,7 @@ int move(int state[N], int K, std::uniform_int_distribution<int> distr, std::mt1
                 dir1 = -1;
                 break;
             default:
-                std::cout << "fuck, line 32";
+                std::cout << "wtf, line 32";
                 return 0;
             }//unpacks the one random integer into a horisontal movement
 
